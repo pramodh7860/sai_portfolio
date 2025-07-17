@@ -1342,6 +1342,11 @@
         .cert-card:nth-child(1) { animation-delay: 0.1s; }
         .cert-card:nth-child(2) { animation-delay: 0.3s; }
         .cert-card:nth-child(3) { animation-delay: 0.5s; }
+        .cert-card:nth-child(4) { animation-delay: 0.7s; }
+        .cert-card:nth-child(5) { animation-delay: 0.9s; }
+        .cert-card:nth-child(6) { animation-delay: 1.1s; }
+        .cert-card:nth-child(7) { animation-delay: 1.3s; }
+        .cert-card:nth-child(8) { animation-delay: 1.5s; }
 
         .cert-icon {
             width: 60px;
@@ -2119,6 +2124,22 @@
                     </div>
                 </div>
             </div>
+            <div class="project-card card">
+                <div class="project-image f1-project">
+                    <i class="fas fa-flag-checkered"></i>
+                </div>
+                <h3 class="project-title">F1 Race Winner Prediction</h3>
+                <p class="project-description">
+                    Machine learning project using historical Formula 1 data to forecast race winners. Implemented advanced data preprocessing, feature engineering, and classification models achieving high prediction accuracy.
+                </p>
+                <div class="project-footer">
+                    <div class="project-tech">
+                        <span class="tech-tag">Python</span>
+                        <span class="tech-tag">Scikit-learn</span>
+                        <span class="tech-tag">Pandas</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -2141,7 +2162,6 @@
                     <p class="cert-date">2024</p>
                 </div>
             </div>
-            
             <div class="cert-card card">
                 <div class="cert-icon">
                     <i class="fas fa-code"></i>
@@ -2152,7 +2172,6 @@
                     <p class="cert-date">June–July 2025</p>
                 </div>
             </div>
-            
             <div class="cert-card card">
                 <div class="cert-icon">
                     <i class="fas fa-graduation-cap"></i>
@@ -2161,6 +2180,60 @@
                     <h3 class="cert-title">Web Development, Computer Fundamentals, Networking</h3>
                     <p class="cert-org">IBM SkillsBuild</p>
                     <p class="cert-date">2024</p>
+                </div>
+            </div>
+            <div class="cert-card card">
+                <div class="cert-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="cert-content">
+                    <h3 class="cert-title">Deep Learning for Developers</h3>
+                    <p class="cert-org">Infosys</p>
+                </div>
+            </div>
+            <div class="cert-card card">
+                <div class="cert-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <div class="cert-content">
+                    <h3 class="cert-title">Introduction to Artificial Intelligence</h3>
+                    <p class="cert-org">Infosys</p>
+                </div>
+            </div>
+            <div class="cert-card card">
+                <div class="cert-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="cert-content">
+                    <h3 class="cert-title">Introduction to Data Science</h3>
+                    <p class="cert-org">Infosys</p>
+                </div>
+            </div>
+            <div class="cert-card card">
+                <div class="cert-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="cert-content">
+                    <h3 class="cert-title">Introduction to Deep Learning</h3>
+                    <p class="cert-org">Infosys</p>
+                </div>
+            </div>
+            <div class="cert-card card">
+                <div class="cert-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="cert-content">
+                    <h3 class="cert-title">Introduction to Machine Learning</h3>
+                    <p class="cert-org">Infosys</p>
+                </div>
+            </div>
+            <div class="cert-card card">
+                <div class="cert-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="cert-content">
+                    <h3 class="cert-title">Foundations: Data, Data, Everywhere</h3>
+                    <p class="cert-org">Google</p>
                 </div>
             </div>
         </div>
@@ -2208,14 +2281,14 @@
                         <i class="fas fa-envelope"></i>
                     </div>
                     <h4>Email</h4>
-                    <p>saisashank@example.com</p>
+                    <p>saisashank_pedada@srmap.edu.in</p>
                 </div>
                 <div class="contact-item">
                     <div class="contact-item-icon">
                         <i class="fas fa-phone"></i>
                     </div>
                     <h4>Phone</h4>
-                    <p>+91 12345 67890</p>
+                    <p>8919355912</p>
                 </div>
                 <div class="contact-item">
                     <div class="contact-item-icon">
@@ -2330,7 +2403,7 @@
             // Create mailto link
             const mailtoSubject = encodeURIComponent(subject || 'Portfolio Contact from ' + name);
             const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-            const mailtoLink = `mailto:saisashank@example.com?subject=${mailtoSubject}&body=${body}`;
+            const mailtoLink = `mailto:saisashank_pedada@srmap.edu.in?subject=${mailtoSubject}&body=${body}`;
             
             // Open email client
             window.location.href = mailtoLink;
