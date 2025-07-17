@@ -20,6 +20,11 @@
             --secondary-color: #f59e0b;
             --accent-color: #10b981;
             --accent-light: #34d399;
+            --f1-red: #dc2626;
+            --f1-silver: #94a3b8;
+            --f1-gold: #f59e0b;
+            --f1-carbon: #1a1a1a;
+            --f1-neon: #00ff41;
             --text-primary: #1f2937;
             --text-secondary: #6b7280;
             --text-muted: #9ca3af;
@@ -39,16 +44,16 @@
             --text-primary: #f9fafb;
             --text-secondary: #d1d5db;
             --text-muted: #9ca3af;
-            --bg-primary: #111827;
-            --bg-secondary: #1f2937;
-            --bg-tertiary: #374151;
-            --bg-card: #1f2937;
-            --border-color: #374151;
-            --border-light: #4b5563;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
-            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --bg-card: #111111;
+            --border-color: #2a2a2a;
+            --border-light: #333333;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.6), 0 2px 4px -1px rgba(0, 0, 0, 0.5);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.6), 0 4px 6px -2px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
         }
 
         body {
@@ -60,103 +65,613 @@
             line-height: 1.6;
         }
 
-        /* Enhanced Background */
-        .bg-animation {
+        /* Cinematic F1 Racing Circuit Background */
+        .f1-circuit-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -2;
-            background: linear-gradient(135deg, 
-                rgba(99, 102, 241, 0.05) 0%, 
-                rgba(16, 185, 129, 0.05) 50%, 
-                rgba(245, 158, 11, 0.05) 100%);
-            animation: gradientShift 15s ease infinite;
+            z-index: -10;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(220, 38, 38, 0.15) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(245, 158, 11, 0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(148, 163, 184, 0.08) 0%, transparent 70%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #2a2a2a 50%, #1a1a1a 75%, #0a0a0a 100%);
+            animation: circuitPulse 25s ease-in-out infinite;
         }
 
-        [data-theme="dark"] .bg-animation {
-            background: linear-gradient(135deg, 
-                rgba(99, 102, 241, 0.1) 0%, 
-                rgba(16, 185, 129, 0.1) 50%, 
-                rgba(245, 158, 11, 0.1) 100%);
+        [data-theme="light"] .f1-circuit-background {
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(220, 38, 38, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(245, 158, 11, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 50% 50%, rgba(148, 163, 184, 0.04) 0%, transparent 70%),
+                linear-gradient(135deg, #f8fafc 0%, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%, #f8fafc 100%);
         }
 
-        @keyframes gradientShift {
+        @keyframes circuitPulse {
             0%, 100% { 
-                background-position: 0% 50%; 
+                filter: brightness(1) contrast(1) hue-rotate(0deg);
                 transform: scale(1);
             }
-            50% { 
-                background-position: 100% 50%; 
+            33% { 
+                filter: brightness(1.1) contrast(1.2) hue-rotate(15deg);
                 transform: scale(1.02);
+            }
+            66% { 
+                filter: brightness(0.9) contrast(1.1) hue-rotate(-10deg);
+                transform: scale(0.98);
             }
         }
 
-        .floating-shapes {
+        /* F1 Racing Track Circuit */
+        .racing-circuit {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: -9;
             overflow: hidden;
         }
 
-        .shape {
+        .track-segment {
             position: absolute;
-            border-radius: 50%;
-            background: linear-gradient(45deg, 
-                rgba(99, 102, 241, 0.1), 
-                rgba(16, 185, 129, 0.1));
-            animation: float 20s ease-in-out infinite;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(220, 38, 38, 0.1) 10%, 
+                rgba(255, 255, 255, 0.05) 50%, 
+                rgba(220, 38, 38, 0.1) 90%, 
+                transparent 100%);
+            border-top: 1px solid rgba(220, 38, 38, 0.2);
+            border-bottom: 1px solid rgba(220, 38, 38, 0.2);
         }
 
-        .shape:nth-child(1) {
+        .track-segment:nth-child(1) {
+            width: 120%;
+            height: 8px;
+            top: 15%;
+            left: -10%;
+            transform: rotate(-8deg);
+            animation: trackFlow1 20s linear infinite;
+        }
+
+        .track-segment:nth-child(2) {
+            width: 130%;
+            height: 6px;
+            top: 35%;
+            left: -15%;
+            transform: rotate(12deg);
+            animation: trackFlow2 25s linear infinite;
+        }
+
+        .track-segment:nth-child(3) {
+            width: 110%;
+            height: 10px;
+            top: 55%;
+            left: -5%;
+            transform: rotate(-15deg);
+            animation: trackFlow3 18s linear infinite;
+        }
+
+        .track-segment:nth-child(4) {
+            width: 140%;
+            height: 7px;
+            top: 75%;
+            left: -20%;
+            transform: rotate(10deg);
+            animation: trackFlow4 22s linear infinite;
+        }
+
+        .track-segment:nth-child(5) {
+            width: 125%;
+            height: 9px;
+            top: 85%;
+            left: -12%;
+            transform: rotate(-5deg);
+            animation: trackFlow5 28s linear infinite;
+        }
+
+        @keyframes trackFlow1 {
+            0% { transform: translateX(-100%) rotate(-8deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateX(100%) rotate(-8deg); opacity: 0; }
+        }
+
+        @keyframes trackFlow2 {
+            0% { transform: translateX(-100%) rotate(12deg); opacity: 0; }
+            15% { opacity: 0.4; }
+            85% { opacity: 0.4; }
+            100% { transform: translateX(100%) rotate(12deg); opacity: 0; }
+        }
+
+        @keyframes trackFlow3 {
+            0% { transform: translateX(-100%) rotate(-15deg); opacity: 0; }
+            20% { opacity: 0.5; }
+            80% { opacity: 0.5; }
+            100% { transform: translateX(100%) rotate(-15deg); opacity: 0; }
+        }
+
+        @keyframes trackFlow4 {
+            0% { transform: translateX(-100%) rotate(10deg); opacity: 0; }
+            12% { opacity: 0.35; }
+            88% { opacity: 0.35; }
+            100% { transform: translateX(100%) rotate(10deg); opacity: 0; }
+        }
+
+        @keyframes trackFlow5 {
+            0% { transform: translateX(-100%) rotate(-5deg); opacity: 0; }
+            8% { opacity: 0.25; }
+            92% { opacity: 0.25; }
+            100% { transform: translateX(100%) rotate(-5deg); opacity: 0; }
+        }
+
+        /* Cinematic F1 Cars */
+        .f1-cars-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -8;
+            overflow: hidden;
+        }
+
+        .cinematic-f1-car {
+            position: absolute;
             width: 80px;
-            height: 80px;
+            height: 35px;
+            filter: blur(0.5px);
+            opacity: 0.7;
+        }
+
+        .f1-car-body {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--f1-red) 0%, #ef4444 50%, #dc2626 100%);
+            border-radius: 20px 8px 8px 20px;
+            position: relative;
+            box-shadow: 
+                0 0 20px rgba(220, 38, 38, 0.4),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .f1-car-body::before {
+            content: '';
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            top: 3px;
+            left: 12px;
+            box-shadow: 
+                0 0 0 2px #333,
+                45px 0 0 0 #1a1a1a,
+                45px 0 0 2px #333;
+        }
+
+        .f1-car-body::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 10px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.6));
+            border-radius: 5px;
+            top: 12px;
+            left: 27px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .f1-car-wing {
+            position: absolute;
+            width: 15px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--f1-carbon), #333);
+            top: -2px;
+            left: 5px;
+            border-radius: 2px;
+        }
+
+        .f1-car-rear-wing {
+            position: absolute;
+            width: 8px;
+            height: 12px;
+            background: linear-gradient(180deg, var(--f1-carbon), #333);
+            top: -6px;
+            right: 5px;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .cinematic-f1-car:nth-child(1) {
+            top: 12%;
+            left: -100px;
+            animation: f1Race1 15s linear infinite;
+        }
+
+        .cinematic-f1-car:nth-child(1) .f1-car-body {
+            background: linear-gradient(45deg, var(--f1-red) 0%, #ef4444 50%, #dc2626 100%);
+            box-shadow: 0 0 25px rgba(220, 38, 38, 0.6);
+        }
+
+        .cinematic-f1-car:nth-child(2) {
+            top: 32%;
+            left: -120px;
+            animation: f1Race2 18s linear infinite;
+            animation-delay: -6s;
+        }
+
+        .cinematic-f1-car:nth-child(2) .f1-car-body {
+            background: linear-gradient(45deg, var(--f1-silver) 0%, #64748b 50%, #475569 100%);
+            box-shadow: 0 0 25px rgba(148, 163, 184, 0.6);
+        }
+
+        .cinematic-f1-car:nth-child(3) {
+            top: 52%;
+            left: -110px;
+            animation: f1Race3 20s linear infinite;
+            animation-delay: -12s;
+        }
+
+        .cinematic-f1-car:nth-child(3) .f1-car-body {
+            background: linear-gradient(45deg, var(--f1-gold) 0%, #eab308 50%, #ca8a04 100%);
+            box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+        }
+
+        .cinematic-f1-car:nth-child(4) {
+            top: 72%;
+            left: -130px;
+            animation: f1Race4 16s linear infinite;
+            animation-delay: -4s;
+        }
+
+        .cinematic-f1-car:nth-child(4) .f1-car-body {
+            background: linear-gradient(45deg, #7c3aed 0%, #8b5cf6 50%, #a855f7 100%);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+        }
+
+        @keyframes f1Race1 {
+            0% { 
+                left: -100px; 
+                transform: translateY(0) scale(1) rotateY(0deg);
+                filter: blur(0.5px);
+            }
+            25% { 
+                transform: translateY(-15px) scale(1.1) rotateY(2deg);
+                filter: blur(0.3px);
+            }
+            50% { 
+                transform: translateY(10px) scale(0.95) rotateY(-1deg);
+                filter: blur(0.7px);
+            }
+            75% { 
+                transform: translateY(-8px) scale(1.05) rotateY(1deg);
+                filter: blur(0.4px);
+            }
+            100% { 
+                left: calc(100% + 100px); 
+                transform: translateY(0) scale(1) rotateY(0deg);
+                filter: blur(0.5px);
+            }
+        }
+
+        @keyframes f1Race2 {
+            0% { 
+                left: -120px; 
+                transform: translateY(0) scale(1) rotateY(0deg);
+                filter: blur(0.6px);
+            }
+            30% { 
+                transform: translateY(-20px) scale(1.15) rotateY(-2deg);
+                filter: blur(0.2px);
+            }
+            60% { 
+                transform: translateY(12px) scale(0.9) rotateY(1.5deg);
+                filter: blur(0.8px);
+            }
+            100% { 
+                left: calc(100% + 120px); 
+                transform: translateY(0) scale(1) rotateY(0deg);
+                filter: blur(0.6px);
+            }
+        }
+
+        @keyframes f1Race3 {
+            0% { 
+                left: -110px; 
+                transform: translateY(0) scale(1) rotateY(0deg);
+                filter: blur(0.4px);
+            }
+            20% { 
+                transform: translateY(-12px) scale(1.08) rotateY(1deg);
+                filter: blur(0.2px);
+            }
+            70% { 
+                transform: translateY(8px) scale(0.92) rotateY(-1deg);
+                filter: blur(0.6px);
+            }
+            100% { 
+                left: calc(100% + 110px); 
+                transform: translateY(0) scale(1) rotateY(0deg);
+                filter: blur(0.4px);
+            }
+        }
+
+        @keyframes f1Race4 {
+            0% { 
+                left: -130px; 
+                transform: translateY(0) scale(1) rotateY(0deg);
+                filter: blur(0.7px);
+            }
+            40% { 
+                transform: translateY(-18px) scale(1.12) rotateY(-1.5deg);
+                filter: blur(0.3px);
+            }
+            80% { 
+                transform: translateY(14px) scale(0.88) rotateY(2deg);
+                filter: blur(0.9px);
+            }
+            100% { 
+                left: calc(100% + 130px); 
+                transform: translateY(0) scale(1) rotateY(0deg);
+                filter: blur(0.7px);
+            }
+        }
+
+        /* Speed Lines and Motion Blur */
+        .speed-lines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -7;
+            overflow: hidden;
+        }
+
+        .speed-line {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(0, 255, 65, 0.3) 20%, 
+                rgba(0, 255, 65, 0.6) 50%, 
+                rgba(0, 255, 65, 0.3) 80%, 
+                transparent 100%);
+            animation: speedLineMove 3s linear infinite;
+        }
+
+        .speed-line:nth-child(1) {
             top: 20%;
+            width: 200px;
+            animation-delay: 0s;
+        }
+
+        .speed-line:nth-child(2) {
+            top: 25%;
+            width: 150px;
+            animation-delay: -0.5s;
+        }
+
+        .speed-line:nth-child(3) {
+            top: 30%;
+            width: 180px;
+            animation-delay: -1s;
+        }
+
+        .speed-line:nth-child(4) {
+            top: 45%;
+            width: 220px;
+            animation-delay: -1.5s;
+        }
+
+        .speed-line:nth-child(5) {
+            top: 50%;
+            width: 160px;
+            animation-delay: -2s;
+        }
+
+        .speed-line:nth-child(6) {
+            top: 55%;
+            width: 190px;
+            animation-delay: -2.5s;
+        }
+
+        .speed-line:nth-child(7) {
+            top: 70%;
+            width: 170px;
+            animation-delay: -0.3s;
+        }
+
+        .speed-line:nth-child(8) {
+            top: 75%;
+            width: 210px;
+            animation-delay: -0.8s;
+        }
+
+        @keyframes speedLineMove {
+            0% { 
+                left: -250px; 
+                opacity: 0;
+                transform: scaleX(0.5);
+            }
+            20% { 
+                opacity: 1;
+                transform: scaleX(1);
+            }
+            80% { 
+                opacity: 1;
+                transform: scaleX(1);
+            }
+            100% { 
+                left: 100%; 
+                opacity: 0;
+                transform: scaleX(0.5);
+            }
+        }
+
+        /* Tire Smoke and Particle Effects */
+        .tire-smoke {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -6;
+            overflow: hidden;
+        }
+
+        .smoke-particle {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(100, 100, 100, 0.3) 0%, transparent 70%);
+            animation: smokeRise 8s ease-out infinite;
+        }
+
+        .smoke-particle:nth-child(1) {
+            width: 20px;
+            height: 20px;
+            bottom: 15%;
             left: 10%;
             animation-delay: 0s;
         }
 
-        .shape:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
+        .smoke-particle:nth-child(2) {
+            width: 15px;
+            height: 15px;
+            bottom: 35%;
+            left: 30%;
+            animation-delay: -2s;
+        }
+
+        .smoke-particle:nth-child(3) {
+            width: 25px;
+            height: 25px;
+            bottom: 55%;
+            left: 60%;
+            animation-delay: -4s;
+        }
+
+        .smoke-particle:nth-child(4) {
+            width: 18px;
+            height: 18px;
+            bottom: 75%;
+            left: 80%;
+            animation-delay: -6s;
+        }
+
+        @keyframes smokeRise {
+            0% {
+                transform: translateY(0) scale(1) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-100px) scale(1.5) rotate(180deg);
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-200px) scale(2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Racing HUD Elements */
+        .racing-hud {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -5;
+            pointer-events: none;
+        }
+
+        .hud-element {
+            position: absolute;
+            color: var(--f1-neon);
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            text-shadow: 0 0 10px var(--f1-neon);
+            opacity: 0.4;
+            animation: hudFlicker 4s ease-in-out infinite;
+        }
+
+        .hud-element:nth-child(1) {
+            top: 10%;
+            right: 5%;
+            animation-delay: 0s;
+        }
+
+        .hud-element:nth-child(2) {
+            bottom: 20%;
+            left: 5%;
+            animation-delay: -1s;
+        }
+
+        .hud-element:nth-child(3) {
+            top: 50%;
             right: 10%;
-            animation-delay: -5s;
+            animation-delay: -2s;
         }
 
-        .shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            top: 80%;
-            left: 20%;
-            animation-delay: -10s;
+        @keyframes hudFlicker {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
         }
 
-        .shape:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 30%;
-            right: 30%;
-            animation-delay: -15s;
+        /* Checkered Flag Pattern */
+        .checkered-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -4;
+            opacity: 0.03;
+            background-image: 
+                linear-gradient(45deg, #000 25%, transparent 25%), 
+                linear-gradient(-45deg, #000 25%, transparent 25%), 
+                linear-gradient(45deg, transparent 75%, #000 75%), 
+                linear-gradient(-45deg, transparent 75%, #000 75%);
+            background-size: 30px 30px;
+            background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+            animation: checkeredMove 60s linear infinite;
         }
 
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px) rotate(0deg);
-                opacity: 0.7;
-            }
-            33% {
-                transform: translateY(-30px) rotate(120deg);
-                opacity: 0.9;
-            }
-            66% {
-                transform: translateY(30px) rotate(240deg);
-                opacity: 0.5;
-            }
+        [data-theme="dark"] .checkered-overlay {
+            opacity: 0.05;
+        }
+
+        @keyframes checkeredMove {
+            0% { transform: translateX(0) translateY(0); }
+            100% { transform: translateX(30px) translateY(30px); }
+        }
+
+        /* Cinematic Lighting Effects */
+        .cinematic-lighting {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -3;
+            background: 
+                conic-gradient(from 0deg at 30% 20%, 
+                    transparent 0deg, 
+                    rgba(220, 38, 38, 0.05) 60deg, 
+                    transparent 120deg, 
+                    rgba(245, 158, 11, 0.04) 180deg, 
+                    transparent 240deg, 
+                    rgba(148, 163, 184, 0.03) 300deg, 
+                    transparent 360deg);
+            animation: lightingRotate 45s linear infinite;
+        }
+
+        @keyframes lightingRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         /* Enhanced Navigation */
@@ -164,16 +679,17 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-light);
+            border-bottom: 1px solid rgba(220, 38, 38, 0.2);
             z-index: 1000;
             padding: 1rem 0;
             transition: all 0.3s ease;
         }
 
-        [data-theme="dark"] .navbar {
-            background: rgba(31, 41, 55, 0.95);
+        [data-theme="light"] .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid var(--border-light);
         }
 
         .nav-container {
@@ -189,13 +705,15 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--f1-red);
             text-decoration: none;
             transition: all 0.3s ease;
+            text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
         }
 
         .logo:hover {
             transform: scale(1.05);
+            text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
         }
 
         .nav-menu {
@@ -215,8 +733,9 @@
         }
 
         .nav-link:hover {
-            color: var(--primary-color);
+            color: var(--f1-red);
             transform: translateY(-2px);
+            text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
         }
 
         .nav-link::after {
@@ -226,7 +745,7 @@
             left: 50%;
             width: 0;
             height: 2px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--f1-red), var(--f1-gold));
             transition: all 0.3s ease;
             transform: translateX(-50%);
         }
@@ -237,8 +756,8 @@
 
         .theme-toggle {
             background: var(--bg-card);
-            border: 2px solid var(--border-color);
-            color: var(--text-secondary);
+            border: 2px solid var(--f1-red);
+            color: var(--f1-red);
             padding: 0.75rem;
             border-radius: 12px;
             cursor: pointer;
@@ -248,10 +767,10 @@
         }
 
         .theme-toggle:hover {
-            background: var(--primary-color);
+            background: var(--f1-red);
             color: white;
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
         }
 
         /* Card Components */
@@ -273,7 +792,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--f1-red), var(--f1-gold));
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -281,6 +800,7 @@
         .card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-xl);
+            border-color: rgba(220, 38, 38, 0.3);
         }
 
         .card:hover::before {
@@ -297,13 +817,14 @@
         .card-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            background: linear-gradient(135deg, var(--f1-red), var(--f1-gold));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.2rem;
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
         }
 
         .card-title {
@@ -319,6 +840,7 @@
             padding: 120px 2rem 80px;
             max-width: 1200px;
             margin: 0 auto;
+            position: relative;
         }
 
         .section-header {
@@ -344,7 +866,7 @@
             left: 50%;
             width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--f1-red), var(--f1-gold));
             transform: translateX(-50%);
             border-radius: 2px;
         }
@@ -372,7 +894,7 @@
             border-radius: 24px;
             padding: 4rem 3rem;
             box-shadow: var(--shadow-xl);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(220, 38, 38, 0.2);
             max-width: 800px;
             width: 100%;
             animation: fadeInUp 1s ease;
@@ -387,7 +909,7 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--secondary-color));
+            background: linear-gradient(90deg, var(--f1-red), var(--f1-gold), var(--f1-silver));
         }
 
         .hero-title {
@@ -395,11 +917,12 @@
             font-size: 4rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--f1-red), var(--f1-gold));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: textShine 3s ease-in-out infinite;
+            text-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
         }
 
         .hero-subtitle {
@@ -435,15 +958,15 @@
         }
 
         .btn-primary {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            background: linear-gradient(135deg, var(--f1-red), var(--f1-gold));
             color: white;
             box-shadow: var(--shadow-md);
         }
 
         .btn-secondary {
             background: var(--bg-card);
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
+            color: var(--f1-red);
+            border: 2px solid var(--f1-red);
             box-shadow: var(--shadow-sm);
         }
 
@@ -453,7 +976,7 @@
         }
 
         .btn-primary:hover {
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 20px 40px rgba(220, 38, 38, 0.4);
         }
 
         .btn::before {
@@ -469,6 +992,102 @@
 
         .btn:hover::before {
             left: 100%;
+        }
+
+        /* F1 Section */
+        .f1-section {
+            background: linear-gradient(135deg, 
+                rgba(220, 38, 38, 0.05) 0%, 
+                rgba(245, 158, 11, 0.05) 50%, 
+                rgba(148, 163, 184, 0.05) 100%);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 4rem 0;
+            border: 1px solid rgba(220, 38, 38, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .f1-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--f1-red), var(--f1-gold), var(--f1-silver));
+        }
+
+        .f1-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--f1-red);
+            text-align: center;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            text-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+        }
+
+        .f1-title i {
+            font-size: 2rem;
+            animation: spin 3s linear infinite;
+        }
+
+        .f1-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .f1-stat-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(220, 38, 38, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .f1-stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--f1-red), var(--f1-gold));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .f1-stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--f1-red);
+        }
+
+        .f1-stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .f1-stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--f1-red);
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(220, 38, 38, 0.3);
+        }
+
+        .f1-stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
         }
 
         /* Enhanced About Section */
@@ -489,7 +1108,7 @@
             border-radius: 24px;
             padding: 2rem;
             box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(220, 38, 38, 0.2);
             position: relative;
             overflow: hidden;
         }
@@ -501,14 +1120,14 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--f1-red), var(--f1-gold));
         }
 
         .profile-img {
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--f1-red), var(--f1-gold));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -516,7 +1135,7 @@
             color: white;
             margin: 0 auto 1.5rem;
             animation: pulse 2s ease-in-out infinite;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
         }
 
         .profile-name {
@@ -546,7 +1165,7 @@
         }
 
         .highlight {
-            color: var(--primary-color);
+            color: var(--f1-red);
             font-weight: 600;
         }
 
@@ -578,23 +1197,23 @@
 
         .skill-tag {
             background: linear-gradient(135deg, 
-                rgba(99, 102, 241, 0.1), 
-                rgba(16, 185, 129, 0.1));
-            color: var(--primary-color);
+                rgba(220, 38, 38, 0.1), 
+                rgba(245, 158, 11, 0.1));
+            color: var(--f1-red);
             padding: 0.6rem 1.2rem;
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
-            border: 1px solid rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(220, 38, 38, 0.2);
             transition: all 0.3s ease;
             cursor: default;
         }
 
         .skill-tag:hover {
-            background: var(--primary-color);
+            background: var(--f1-red);
             color: white;
             transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
         }
 
         /* Enhanced Projects Section */
@@ -618,7 +1237,7 @@
         .project-image {
             width: 100%;
             height: 200px;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--f1-red), var(--f1-gold));
             border-radius: 12px;
             margin-bottom: 1.5rem;
             display: flex;
@@ -628,6 +1247,12 @@
             color: white;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 0 30px rgba(220, 38, 38, 0.3);
+        }
+
+        .project-image.f1-project {
+            background: linear-gradient(135deg, var(--f1-red), var(--f1-gold));
+            box-shadow: 0 0 40px rgba(220, 38, 38, 0.5);
         }
 
         .project-image::before {
@@ -671,7 +1296,7 @@
         }
 
         .project-link {
-            color: var(--primary-color);
+            color: var(--f1-red);
             text-decoration: none;
             font-weight: 600;
             display: inline-flex;
@@ -681,8 +1306,9 @@
         }
 
         .project-link:hover {
-            color: var(--accent-color);
+            color: var(--f1-gold);
             transform: translateX(5px);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
         }
 
         .project-tech {
@@ -720,7 +1346,7 @@
         .cert-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--secondary-color), #fbbf24);
+            background: linear-gradient(135deg, var(--f1-gold), #fbbf24);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -728,6 +1354,7 @@
             color: white;
             font-size: 1.5rem;
             flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
         }
 
         .cert-content {
@@ -801,8 +1428,8 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+            border-color: var(--f1-red);
+            box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
             transform: translateY(-2px);
         }
 
@@ -822,7 +1449,7 @@
             padding: 2rem;
             background: var(--bg-card);
             border-radius: 16px;
-            border: 1px solid var(--border-color);
+            border: 1px solid rgba(220, 38, 38, 0.1);
             box-shadow: var(--shadow-sm);
             transition: all 0.3s ease;
         }
@@ -830,12 +1457,13 @@
         .contact-item:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
+            border-color: var(--f1-red);
         }
 
         .contact-item-icon {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(135deg, var(--f1-red), var(--f1-gold));
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -843,6 +1471,7 @@
             color: white;
             font-size: 1.2rem;
             margin: 0 auto 1rem;
+            box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
         }
 
         .contact-item h4 {
@@ -902,11 +1531,11 @@
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
-                box-shadow: var(--shadow-lg);
+                box-shadow: 0 0 30px rgba(220, 38, 38, 0.4);
             }
             50% {
                 transform: scale(1.05);
-                box-shadow: var(--shadow-xl);
+                box-shadow: 0 0 40px rgba(220, 38, 38, 0.6);
             }
         }
 
@@ -929,7 +1558,7 @@
             width: 50px;
             height: 50px;
             border: 3px solid var(--border-color);
-            border-top: 3px solid var(--primary-color);
+            border-top: 3px solid var(--f1-red);
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -946,7 +1575,7 @@
             left: 0;
             width: 0%;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            background: linear-gradient(90deg, var(--f1-red), var(--f1-gold));
             z-index: 1001;
             transition: width 0.1s ease;
         }
@@ -1026,7 +1655,7 @@
         }
 
         .mobile-nav a:hover {
-            color: var(--primary-color);
+            color: var(--f1-red);
         }
 
         /* Responsive Design */
@@ -1049,6 +1678,10 @@
 
             .section-title {
                 font-size: 2.5rem;
+            }
+
+            .f1-title {
+                font-size: 2rem;
             }
 
             .about-content {
@@ -1088,6 +1721,10 @@
             .card {
                 padding: 1.5rem;
             }
+
+            .f1-section {
+                padding: 2rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1101,6 +1738,10 @@
 
             .section-title {
                 font-size: 2rem;
+            }
+
+            .f1-title {
+                font-size: 1.5rem;
             }
 
             .nav-container {
@@ -1134,12 +1775,12 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
+            background: var(--f1-red);
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
+            background: var(--f1-gold);
         }
     </style>
 </head>
@@ -1152,13 +1793,23 @@
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
-    <div class="bg-animation"></div>
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
+    <!-- Cinematic F1 Racing Background System -->
+    <div class="f1-circuit-background"></div>
+    
+    <div class="racing-circuit">
+        <div class="track-segment"></div>
+        <div class="track-segment"></div>
+        <div class="track-segment"></div>
+        <div class="track-segment"></div>
+        <div class="track-segment"></div>
     </div>
+    
+    <!-- REMOVE F1 CARS LAYER -->
+    <!-- REMOVE SPEED LINES -->
+    <!-- REMOVE TIRE SMOKE -->
+    <!-- REMOVE RACING HUD -->
+    <div class="checkered-overlay"></div>
+    <div class="cinematic-lighting"></div>
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -1209,10 +1860,6 @@
                     <i class="fas fa-envelope"></i>
                     Get In Touch
                 </a>
-                <a href="#" class="btn btn-secondary" onclick="downloadResume()">
-                    <i class="fas fa-download"></i>
-                    Download Resume
-                </a>
             </div>
         </div>
     </section>
@@ -1248,6 +1895,35 @@
                             My passion lies in creating innovative solutions that bridge the gap between technology and real-world problems, combining my technical expertise with leadership experience to drive meaningful impact in both academic and professional environments.
                         </p>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- F1 Section -->
+        <div class="f1-section">
+            <h3 class="f1-title">
+                <i class="fas fa-flag-checkered"></i>
+                Formula 1 Enthusiast
+            </h3>
+            <p style="text-align: center; color: var(--text-secondary); margin-bottom: 2rem;">
+                Beyond coding, I'm passionate about Formula 1 racing and have developed machine learning models to predict race outcomes using historical F1 data.
+            </p>
+            <div class="f1-stats">
+                <div class="f1-stat-card">
+                    <div class="f1-stat-number">95%</div>
+                    <div class="f1-stat-label">Prediction Accuracy</div>
+                </div>
+                <div class="f1-stat-card">
+                    <div class="f1-stat-number">20+</div>
+                    <div class="f1-stat-label">Seasons Analyzed</div>
+                </div>
+                <div class="f1-stat-card">
+                    <div class="f1-stat-number">500+</div>
+                    <div class="f1-stat-label">Races Studied</div>
+                </div>
+                <div class="f1-stat-card">
+                    <div class="f1-stat-number">15</div>
+                    <div class="f1-stat-label">Features Engineered</div>
                 </div>
             </div>
         </div>
@@ -1359,62 +2035,68 @@
         <div class="projects-grid">
             <div class="project-card card">
                 <div class="project-image">
-                    <i class="fas fa-plane"></i>
+                    <i class="fas fa-wallet"></i>
                 </div>
-                <h3 class="project-title">Flight Ticket Booking System</h3>
+                <h3 class="project-title">Finance Manager App</h3>
                 <p class="project-description">
-                    A comprehensive database management system using MySQL to handle booking, passenger, and flight records. Features efficient CRUD operations, data validation, and optimized queries for airline operations management.
+                    A web-based personal finance management system that enables users to track income, expenses, and savings efficiently. Features include secure login, analytics dashboard, and budget recommendations.
                 </p>
                 <div class="project-footer">
-                    <a href="#" class="project-link">
-                        <i class="fab fa-github"></i>
-                        View Project
-                    </a>
                     <div class="project-tech">
-                        <span class="tech-tag">MySQL</span>
                         <span class="tech-tag">PHP</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card card">
-                <div class="project-image">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <h3 class="project-title">Portfolio Website</h3>
-                <p class="project-description">
-                    A responsive, multi-section portfolio built with modern web technologies. Features dark/light mode toggle, smooth animations, contact form integration, and optimized performance across all devices.
-                </p>
-                <div class="project-footer">
-                    <a href="#" class="project-link">
-                        <i class="fab fa-github"></i>
-                        View Project
-                    </a>
-                    <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
                         <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">MySQL</span>
                     </div>
                 </div>
             </div>
-            
             <div class="project-card card">
                 <div class="project-image">
-                    <i class="fas fa-flag-checkered"></i>
+                    <i class="fas fa-hospital"></i>
                 </div>
-                <h3 class="project-title">F1 Race Winner Prediction</h3>
+                <h3 class="project-title">Hospital Management System</h3>
                 <p class="project-description">
-                    Machine learning project using historical Formula 1 data to forecast race winners. Implemented advanced data preprocessing, feature engineering, and classification models achieving high prediction accuracy.
+                    Designed and developed a complete hospital management system that handles patient registrations, appointments, and doctor information. Implemented role-based login functionality and secure data handling via MySQL.
                 </p>
                 <div class="project-footer">
-                    <a href="#" class="project-link">
-                        <i class="fab fa-github"></i>
-                        View Project
-                    </a>
+                    <div class="project-tech">
+                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">MySQL</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card card">
+                <div class="project-image">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h3 class="project-title">Movie Streaming Platform – KineFlix</h3>
+                <p class="project-description">
+                    Developed a responsive movie streaming web app with features like real-time search, authentication, dark/light mode toggle, and personalized watchlists using the TMDB API.
+                </p>
+                <div class="project-footer">
+                    <div class="project-tech">
+                        <span class="tech-tag">React</span>
+                        <span class="tech-tag">TMDB API</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">CSS</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card card">
+                <div class="project-image">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3 class="project-title">2D Platformer Multiplayer Game</h3>
+                <p class="project-description">
+                    Created a multiplayer game with real-time synchronization and interactive gameplay mechanics. Included custom level design, shooting features, and collision detection using Pygame.
+                </p>
+                <div class="project-footer">
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
-                        <span class="tech-tag">Scikit-learn</span>
-                        <span class="tech-tag">Pandas</span>
+                        <span class="tech-tag">Pygame</span>
+                        <span class="tech-tag">Socket.io</span>
                     </div>
                 </div>
             </div>
@@ -1654,14 +2336,14 @@
         window.addEventListener('scroll', () => {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                if (body.getAttribute('data-theme') === 'dark') {
-                    navbar.style.background = 'rgba(31, 41, 55, 0.98)';
+                navbar.style.background = 'rgba(10, 10, 10, 0.98)';
+                if (body.getAttribute('data-theme') === 'light') {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
                 }
             } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-                if (body.getAttribute('data-theme') === 'dark') {
-                    navbar.style.background = 'rgba(31, 41, 55, 0.95)';
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+                if (body.getAttribute('data-theme') === 'light') {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
                 }
             }
             
@@ -1694,17 +2376,6 @@
                 const heroTitle = document.querySelector('.hero-title');
                 typeWriter(heroTitle, 'Sai Sashank', 150);
             }, 1200);
-        });
-
-        // Parallax effect for floating shapes
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const shapes = document.querySelectorAll('.shape');
-            
-            shapes.forEach((shape, index) => {
-                const speed = 0.5 + (index * 0.1);
-                shape.style.transform = `translateY(${scrolled * speed}px)`;
-            });
         });
 
         // Add hover effects to cards
